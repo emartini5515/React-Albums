@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { ScrollView } from 'react-native';
 //We use a library called Axios to make http ajax requests.
 import axios from 'axios';
+import AlbumDetail from './AlbumDetail'
 
 //Component base class is from the React library which our class extends.
 //Class based components must always define a Render method which returns JSX.
@@ -19,13 +20,23 @@ class AlbumList extends Component {
         .then(response => this.setState({ albums: response.data }));
     }
 
+    renderAlbums() {
+        //.map is an array helper that takes in a fat arrow function which will be called for each item in the array.
+        //{} wrapper references the js object within. 
+        //key property is used to identify elements in the array. This should be unique. Ex. Guid
+        return this.state.albums.map(album => 
+            <AlbumDetail key={album.title} album={album}/>
+        );
+    }
+
     render() {
         console.log(this.state);
 
         return (
-            <View>
-                <Text>Album List!!!</Text>
-            </View>
+            //Allows for scrolling on the screen. The root view must have a style of flex: 1
+            <ScrollView>
+                {this.renderAlbums()}
+            </ScrollView>
         );
     }
 }

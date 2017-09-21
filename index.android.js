@@ -21,7 +21,8 @@ const App = () => (
     //jsx
     // <Text>Some Text</Text>
     //Multiple different components must be wrapped in a View.
-    <View>
+    //flex: 1 will expand the component to fill the entire area of the screen.
+    <View style={{ flex: 1 }}>
       <Header headerText={'Albums'} />
       <AlbumList />
     </View>
